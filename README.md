@@ -71,7 +71,7 @@ zberta = ZBERTA(berta, model_name)
 As example run:
 
 ```python
-zberta._find_new_intents(["I want to buy a book but I lost all my money, where can I make a withdrawal?"])
+zberta.find_new_intents(["I want to buy a book but I lost all my money, where can I make a withdrawal?"])
 ```
 ```
 Output: ['make withdrawal']

@@ -24,7 +24,7 @@ class ZBERTA:
         else:
             self.nlp = pipeline("zero-shot-classification", model=model, tokenizer=tokenizer)
 
-    def _find_new_intents(self, utterances: List = None):
+    def find_new_intents(self, utterances: List = None):
         self.model.eval()
         preds = []
         for i in tqdm(range(0, len(self.dataset if utterances is None else utterances))):
@@ -49,7 +49,7 @@ class ZBERTA:
 
     def compute_semantic_similarity(self, model_name="sentence-transformers/distiluse-base-multilingual-cased-v1"):
         model = SentenceTransformer(model_name)
-        preds = self._find_new_intents()
+        preds = self.find_new_intents()
         sim_pred = []
         for i in tqdm(range(0, len(self.dataset))):
             label = self.g_classes[i].replace("_", " ")
