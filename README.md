@@ -16,7 +16,7 @@ The [wget](https://www.gnu.org/software/wget/) tool is required for this package
 In order to install Z-BERT-A it is just needed to execute the following pip command which will make sure everything is accordingly installed.
 
 ```console
-pip install git+https://github.com/GT4SD/Z-BERT-A.git
+pip install git+https://github.com/GT4SD/zberta.git
 ```
 
 ## Usage information
