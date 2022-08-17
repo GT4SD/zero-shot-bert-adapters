@@ -1,5 +1,5 @@
 # Z-BERT-A
-Repository containing code for Z-BERT-A implementation
+Repository containing code for Z-BERT-A, which is the implementation of the paper [Z-BERT-A: a zero-shot pipeline for unknown intent detection](https://arxiv.org/abs/2208.07084).
 
 <img src="https://gcdnb.pbrd.co/images/tkk47EXWXM5B.png?o=1" width=523 height=466>
 
