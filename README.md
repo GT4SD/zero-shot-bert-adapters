@@ -46,7 +46,7 @@ if training:
         trainer.start_testing()
 z_banking = DataBanking(model_name, device)
 z_dataset = z_banking.z_iterator()
-z_intents = unknown_intents_set("en_core_web_trf", z_dataset['test']['text'])
+z_intents = unknown_intents_set(z_dataset['test']['text'])
 berta = model.instantiate_model(z_banking.labels(), z_banking.output_dim(), device, model_name,
                                 z_banking.nli_labels(), path="model.pt", dict=True)
 zberta = ZBERTA(berta, model_name, z_dataset['test']['text'], z_intents, z_dataset['test']['category'])
