@@ -1,3 +1,4 @@
+import spacy_transformers
 import spacy
 from spacy import displacy
 import os
