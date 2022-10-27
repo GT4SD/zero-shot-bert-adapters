@@ -1,5 +1,5 @@
 from setuptools import setup
 import os
 
-os.system("pip install keybert spacy-transformers --no-deps")
+os.system("pip3 install keybert spacy-transformers --no-deps")
 setup()
