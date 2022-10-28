@@ -14,6 +14,7 @@ The [wget](https://www.gnu.org/software/wget/) tool is required for this package
 
 ## Installation
 In order to install Z-BERT-A it is just needed to execute the following pip command which will make sure everything is accordingly installed.
+Z-BERT-A uses spaCy with 'en_core_web_trf', this package will try to install it automatically itself if not present but make sure you have it installed through the suggested way of [spaCy](https://github.com/explosion/spaCy).
 
 ```console
 pip install git+https://github.com/GT4SD/zberta.git
