@@ -11,3 +11,4 @@ spacy~=3.4.0
 setuptools~=60.2.0
 sentence-transformers~=2.2.2
 spacy-alignments~=0.8.5
+spacy-transformers
