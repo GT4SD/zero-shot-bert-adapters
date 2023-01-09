@@ -1,3 +1,4 @@
+import spacy_transformers
 import spacy
 from spacy import displacy
 import os
@@ -8,7 +9,11 @@ from nltk.corpus import wordnet
 
 default_spacy = "en_core_web_trf"
 os.system("python -m spacy download en_core_web_trf --no-deps")
-nlp_engine = spacy.load("en_core_web_trf")
+try:
+    nlp_engine = spacy.load("en_core_web_trf")
+except:
+    os.system("python3 -m spacy download en_core_web_trf --no-deps")
+    nlp_engine = spacy.load("en_core_web_trf")
 lemmatizer = WordNetLemmatizer()
 
 
