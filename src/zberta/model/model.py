@@ -30,7 +30,7 @@ def instantiate_model(labels, out_dim, device, model_name, nli_labels, path=None
     model = BERTA(bert_model, HIDDEN_DIM, OUTPUT_DIM, dict).to(device)
 
     if path is None or not os.path.isfile(path):
-        os.system("wget -O model.pt '" + get_pretrained_model() + "'")
+        os.system("wget -O model.pt '" + get_pretrained_model(out_dim) + "'")
         model.load_state_dict(torch.load('model.pt', map_location=device))
     else:
         model.load_state_dict(torch.load(path, map_location=device))
