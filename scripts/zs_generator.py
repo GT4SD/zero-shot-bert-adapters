@@ -41,7 +41,7 @@ def main(dataset, prompt, model_name_or_path, cache_dir, output_path):
     prompts = []
     generations = []
 
-    for case in tqdm(data.iterrows()):
+    for _, case in tqdm(data.iterrows()):
 
         input_text = prompt.format(case["text"])
         prompts.append(prompt)
