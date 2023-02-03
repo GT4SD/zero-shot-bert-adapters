@@ -52,7 +52,7 @@ def main(dataset, prompt, model_name_or_path, cache_dir, output_path):
 
     df = pd.DataFrame.from_dict(
         {
-            "utterance": data["cases"].to_list(),
+            "utterance": data["text"].to_list(),
             "prompt": prompts,
             model_name_or_path: generations,
             "category": data["category"].to_list(),
