@@ -1,19 +1,34 @@
-from transformers import  AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, AutoModel
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    AutoModelForSeq2SeqLM,
+    AutoModel,
+)
 from keybert import KeyBERT
 import torch
 
 DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-class generator():
 
+class generator:
     def __init__(self, model_name_or_path, cache_dir):
 
-        self.model = AutoModel.from_pretrained(model_name_or_path, return_dict_in_generate=True,
-                                                      cache_dir=cache_dir).to(DEVICE)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+        self.model = AutoModel.from_pretrained(
+            model_name_or_path, return_dict_in_generate=True, cache_dir=cache_dir
+        ).to(DEVICE)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path, cache_dir=cache_dir
+        )
 
-
-    def generate_text(self, text, top_k=20, top_p=1.0, min_length=10, max_length=512, num_of_sequences=1):
+    def generate_text(
+        self,
+        text,
+        top_k=20,
+        top_p=1.0,
+        min_length=10,
+        max_length=512,
+        num_of_sequences=1,
+    ):
 
         input_ids = self.tokenizer.encode(text, return_tensors="pt").to(DEVICE)
 
@@ -44,32 +59,39 @@ class generator():
 
         return output
 
-class t0_generator(generator):
 
+class t0_generator(generator):
     def __init__(self, model_name_or_path, cache_dir):
 
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, return_dict_in_generate=True,
-                                                      cache_dir=cache_dir).to(DEVICE)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(
+            model_name_or_path, return_dict_in_generate=True, cache_dir=cache_dir
+        ).to(DEVICE)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path, cache_dir=cache_dir
+        )
 
 
 class gpt_generator(generator):
-
     def __init__(self, model_name_or_path, cache_dir):
 
-        self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, return_dict_in_generate=True,
-                                                      cache_dir=cache_dir).to(DEVICE)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_name_or_path, return_dict_in_generate=True, cache_dir=cache_dir
+        ).to(DEVICE)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path, cache_dir=cache_dir
+        )
 
-class keybert_generator():
 
+class keybert_generator:
     def __init__(self, model_name_or_path=None, cache_dir=None):
 
         self.model = KeyBERT(model_name_or_path, cache_dir=cache_dir)
 
     def generate_text(self, text):
 
-        keywords = self.model.extract_keywords(text, keyphrase_ngram_range=(1, 2), stop_words=None)
+        keywords = self.model.extract_keywords(
+            text, keyphrase_ngram_range=(1, 2), stop_words=None
+        )
 
         best_match = None
         best_score = 0

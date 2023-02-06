@@ -4,6 +4,7 @@ import ast
 from tqdm import tqdm
 from zs_model_generators import t0_generator, gpt_generator, keybert_generator
 
+
 def find_model_class(model_name_or_path):
 
     if "t0" in model_name_or_path.lower():
@@ -15,61 +16,53 @@ def find_model_class(model_name_or_path):
     else:
         raise ValueError(f"{model_name_or_path} is not supported")
 
-@click.command()
-@click.option('--datafile',
-              type=str,
-              required=True,
-              help='Path to the datafile'
-)
-@click.option('--prompt',
-              type=str,
-              required=True,
-              help='Prompt to be used.'
-)
-@click.option('--model_name_or_path',
-              type=str,
-              required=True,
-              help='Model to be used for the generation.'
-)
-@click.option('--cache_dir',
-              type=str,
-              default="/tmp",
-              help='Cache directory for the model.'
-)
-@click.option('--output_path',
-              type=str,
-              required=True,
-              help='Path to save the generations.'
-)
-def main(datafile, prompt, model_name_or_path, cache_dir, output_path):
 
-    data = pd.read_csv(datafile)
-    data = data.to_dict('records')
+@click.command()
+@click.option("--dataset", type=str, required=True, help="Dataset's path")
+@click.option("--prompt", type=str, required=True, help="Prompt to be used.")
+@click.option(
+    "--model_name_or_path",
+    type=str,
+    required=True,
+    help="Model to be used for the generation.",
+)
+@click.option(
+    "--cache_dir", type=str, required=True, help="Cache directory for the model."
+)
+@click.option(
+    "--output_path", type=str, required=True, help="Path to save the generations."
+)
+def main(dataset, prompt, model_name_or_path, cache_dir, output_path):
 
     model_class = find_model_class(model_name_or_path)
     model = model_class(model_name_or_path, cache_dir)
 
-    utterances = []
-    classes = []
+    data = pd.read_csv(dataset)
+
     prompts = []
     generations = []
 
-    for case in tqdm(data):
-
-        utterances.append(case["utterance"])
-        classes.append(case["classes"])
+    for _, case in tqdm(data.iterrows()):
 
         classes_list = ast.literal_eval(case["classes"])
 
-        input_text = prompt.format(case["utterance"], " ".join(set(classes_list)))
+        input_text = prompt.format(case["text"], " ".join(set(classes_list)))
         prompts.append(prompt)
-        
+
         generated = model.generate_text(input_text)
 
         generations.append(generated[0])
 
-    df = pd.DataFrame.from_dict({"utterance":utterances, "classes": classes, "prompt":prompts, model_name_or_path:generations})
+    df = pd.DataFrame.from_dict(
+        {
+            "utterance": data["text"].to_list(),
+            "classes": data["classes"].to_list(),
+            "prompt": prompts,
+            model_name_or_path: generations,
+        }
+    )
     df.to_csv(output_path)
+
 
 if __name__ == "__main__":
     main()
