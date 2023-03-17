@@ -24,13 +24,13 @@ class ZBERTA:
         else:
             self.nlp = pipeline("zero-shot-classification", model=model, tokenizer=tokenizer)
 
-    def find_new_intents(self, utterances: List = None):
+    def find_new_intents(self, utterances: List = None, lang='en'):
         self.model.eval()
         preds = []
         for i in tqdm(range(0, len(self.dataset if utterances is None else utterances))):
             pred_classes = []
             if utterances is not None:
-                classes = unknown_intents_set(utterances)
+                classes = unknown_intents_set(utterances, lang)
             else:
                 classes = self.z_classes
             for class_set in classes[i]:
