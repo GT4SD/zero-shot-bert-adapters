@@ -73,7 +73,7 @@ def en_dependency_parser(dataset):
 
 def it_dependency_parser(dataset):
     classes = []
-    for i in tqdm(range(0, len(dataset['test']))):
+    for i in tqdm(range(0, len(dataset))):
         action = None
         object = None
         action1 = None
@@ -82,7 +82,7 @@ def it_dependency_parser(dataset):
         object2 = None
         action3 = None
         object3 = None
-        doc = nlp_engine(dataset['test'][i]['text'].replace('?', '').replace('!', '').replace('-', ''))
+        doc = nlp_engine(dataset[i].replace('?',' ').replace('!', ' ').replace('-', ' '))
         deps = displacy.parse_deps(doc)
 
         for arc in deps['arcs']:
