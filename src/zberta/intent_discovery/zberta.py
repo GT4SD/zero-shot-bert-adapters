@@ -32,7 +32,7 @@ class ZBERTA:
             if utterances is not None:
                 print(utterances[i])
                 print(lang)
-                classes = unknown_intents_set(utterances[i], lang)
+                classes = unknown_intents_set([utterances[i]], lang)
                 print(classes)
             else:
                 classes = self.z_classes
