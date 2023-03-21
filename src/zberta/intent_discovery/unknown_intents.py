@@ -121,10 +121,8 @@ def unknown_intents_set(dataset, lang, spacy_model=None):
         os.system("python -m spacy download " + spacy_model + " --no-deps")
         nlp_engine = spacy.load(spacy_model)
     if lang == 'en':
-        print("calling EN")
         classes = en_dependency_parser(dataset)
     elif lang == 'it':
-        print("calling IT")
         classes = it_dependency_parser(dataset)
     else:
         classes = None

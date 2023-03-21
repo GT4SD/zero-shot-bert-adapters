@@ -3,7 +3,7 @@ from transformers import pipeline
 from ..utils.utils import init_tokenizer
 from .unknown_intents import unknown_intents_set, lemmatization
 from sentence_transformers import SentenceTransformer, util
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import string
 import numpy as np
 import torch
@@ -30,24 +30,17 @@ class ZBERTA:
         for i in tqdm(range(0, len(self.dataset if utterances is None else utterances))):
             pred_classes = []
             if utterances is not None:
-                print(utterances[i])
-                print(lang)
                 classes = unknown_intents_set([utterances[i]], lang)
-                print(classes)
             else:
                 classes = self.z_classes
             for class_set in classes[i]:
-                print(class_set)
                 temp = class_set.replace('-', ' ').replace('None', '')
                 if temp not in pred_classes and len(temp) > 1:
-                    print(temp)
                     pred_classes.append(temp)
             with torch.no_grad():
                 try:
-                    print(pred_classes)
                     pred = self.nlp(self.dataset[i] if utterances is None else utterances[i], pred_classes,
                                     multi_label=False)
-                    print(pred)
                     preds.append(pred['labels'][0])
                 except:
                     print("ERROR: no potential intents found")
