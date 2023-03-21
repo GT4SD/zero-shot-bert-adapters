@@ -30,12 +30,17 @@ class ZBERTA:
         for i in tqdm(range(0, len(self.dataset if utterances is None else utterances))):
             pred_classes = []
             if utterances is not None:
+                print(utterances[i])
+                print(lang)
                 classes = unknown_intents_set(utterances[i], lang)
+                print(classes)
             else:
                 classes = self.z_classes
             for class_set in classes[i]:
+                print(class_set)
                 temp = class_set.replace('-', ' ').replace('None', '')
                 if temp not in pred_classes and len(temp) > 1:
+                    print(temp)
                     pred_classes.append(temp)
             with torch.no_grad():
                 try:
