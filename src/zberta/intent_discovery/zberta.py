@@ -39,8 +39,10 @@ class ZBERTA:
                     pred_classes.append(temp)
             with torch.no_grad():
                 try:
+                    print(pred_classes)
                     pred = self.nlp(self.dataset[i] if utterances is None else utterances[i], pred_classes,
                                     multi_label=False)
+                    print(pred)
                     preds.append(pred['labels'][0])
                 except:
                     print("ERROR: no potential intents found")

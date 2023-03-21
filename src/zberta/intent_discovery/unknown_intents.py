@@ -90,7 +90,6 @@ def it_dependency_parser(dataset):
                 start = deps['words'][arc['start']]
                 if start['tag'] == 'VERB':
                     action = start['text'].lower()
-
                 end = deps['words'][arc['end']]
                 if end['tag'] == 'NOUN':
                     object = end['text'].lower()
