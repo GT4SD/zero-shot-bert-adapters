@@ -3,7 +3,7 @@ Repository containing code for Zero-shot-BERT-adapters (Z-BERT-A), which is the 
 
 <img src="https://user-images.githubusercontent.com/6382701/195600358-24c3f136-96f0-4a8a-8eaf-220970ca0604.png" width=523 height=466>
 
-## Deployment example of an use-case of Z-BERT-A pipeline
+## Deployment example of an use-case of Zero-shot-BERT-adapters pipeline
 
 ![image](https://media.github.ibm.com/user/367427/files/1218bf00-15bc-11ed-8b7e-308e7783b3cf)
 
@@ -13,11 +13,11 @@ This repository makes use of the module [Adapter Transformers](https://github.co
 The [wget](https://www.gnu.org/software/wget/) tool is required for this package, for Windows users please make sure to install it accordingly before running this module.
 
 ## Installation
-In order to install Z-BERT-A it is just needed to execute the following pip command which will make sure everything is accordingly installed.
-Z-BERT-A uses spaCy with 'en_core_web_trf', this package will try to install it automatically itself if not present but make sure you have it installed through the suggested way of [spaCy](https://github.com/explosion/spaCy).
+In order to install Zero-shot-BERT-adapters it is just needed to execute the following pip command which will make sure everything is accordingly installed.
+Zero-shot-BERT-adapters uses spaCy with 'en_core_web_trf', this package will try to install it automatically itself if not present but make sure you have it installed through the suggested way of [spaCy](https://github.com/explosion/spaCy).
 
 ```console
-pip install git+https://github.com/GT4SD/zberta.git
+pip install git+https://github.com/GT4SD/zero-shot-bert-adapters.git
 ```
 
 ## Usage information
@@ -55,7 +55,7 @@ z_acc = zberta.zero_shot_intents()
 print(z_acc)
 ```
 
-For simple usage of the Z-BERT-A pipeline instead it's just needed to load the Z-BERT-A pipeline and model through this simple code which encapsulate all the complexity behind.
+For simple usage of the Zero-shot-BERT-adapters pipeline instead it's just needed to load the pipeline and model through this simple code which encapsulate all the complexity behind.
 
 ```python
 import torch
