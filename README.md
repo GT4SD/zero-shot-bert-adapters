@@ -5,7 +5,7 @@ Repository containing code for Zero-shot-BERT-adapters (Z-BERT-A), a two-stage m
 
 ## Deployment example of an use-case of Zero-shot-BERT-adapters pipeline
 
-![image](https://i.ibb.co/RTrm66c/image.png)
+![image](https://i.postimg.cc/y8yNP4gp/image.png)
 
 
 
