@@ -33,7 +33,7 @@ class ZBERTA:
                 classes = unknown_intents_set([utterances[i]], lang)
             else:
                 classes = self.z_classes
-            for class_set in classes[i]:
+            for class_set in classes[0]:
                 temp = class_set.replace('-', ' ').replace('None', '')
                 if temp not in pred_classes and len(temp) > 1:
                     pred_classes.append(temp)
